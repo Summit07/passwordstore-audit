@@ -30,6 +30,15 @@ contract PasswordStoreTest is Test {
         assertEq(actualPassword, expectedPassword); //?  === comapring the new and setted password
     }
 
+    function test_anyone_can_set_password() public {
+        //! start prank with owner
+        vm.startPrank(address(1));
+        string memory expectedPassword = "myNewPassword";
+        passwordStore.setPassword(expectedPassword); //? ---- pass the password using setPassword() function
+        string memory actualPassword = passwordStore.getPassword(); //? --- gettting new Password
+        assertEq(actualPassword, expectedPassword); //?  === comapring the new and setted password
+    }
+
     //!   Check if non owner can set the password
     function test_non_owner_reading_password_reverts() public {
         //! start prank with other address not related to owner
