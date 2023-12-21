@@ -5,6 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {PasswordStore} from "../src/PasswordStore.sol";
 
 contract DeployPasswordStore is Script {
+    //! Run() the Deploy Script and return (PasswordStore)
     function run() public returns (PasswordStore) {
         vm.startBroadcast();
         PasswordStore passwordStore = new PasswordStore();

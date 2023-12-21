@@ -9,6 +9,7 @@ pragma solidity 0.8.18;
  */
 contract PasswordStore {
     error PasswordStore__NotOwner();
+    error PasswordStore__OnlyOwner_Can_Change_Password();
 
     address private s_owner;
     string private s_password;
@@ -20,7 +21,9 @@ contract PasswordStore {
     }
 
     modifier onlyowner() {
-        msg.sender == s_owner;
+        if (msg.sender != s_owner) {
+            revert PasswordStore__OnlyOwner_Can_Change_Password();
+        }
         _;
     }
 
